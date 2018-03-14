@@ -1,0 +1,16 @@
+{
+  "name": "node-door",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "configurations": "^3.0.0",
+    "firmata": "^0.19.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christopher Schirner <schinken@bamberg.ccc.de>",
+  "license": "MIT"
+}
