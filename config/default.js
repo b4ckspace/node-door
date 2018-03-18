@@ -1,5 +1,9 @@
 module.exports = {
 
+    http: {
+        port: 8282
+    },
+
     firmata: {
         port: '/dev/ttyUSB0'
     },
