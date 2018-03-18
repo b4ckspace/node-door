@@ -64,14 +64,20 @@ select, input, .button {
 }
 
 #users {
+    -webkit-appearance: none;
     -moz-appearance: none;
-    text-indent: 0.01px;
+    text-indent: 1px;
     text-overflow: "";
 
     background-image: url(/img/arrow-down.png);
     background-repeat: no-repeat;
     background-position: right 18px center;
 }
+
+#users::-ms-expand {
+    display: none;
+}
+
 
 .type {
     width: 49%;
