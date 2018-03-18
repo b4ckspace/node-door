@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const config = require('./lib/config').getConfig('/home/schinken/projects/backspace/node-door/config/production.js');
 const Ldap = require('./lib/Auth/Ldap');
 const Door = require('./lib/Control/Door');
+const Watcher = require('./lib/Control/Watcher');
 
 
 const ldap = new Ldap(config.ldap);
@@ -18,22 +19,23 @@ async
         (callback) => {
             const board = new Firmata(config.firmata.port);
             board.on('ready', () => {
-                console.log("Board connected!");
+                console.log("Setup: Board connection");
                 return callback(null, board);
             })
         },
 
         (board, callback) => {
-            const door = new Door(board, config.door);
+            const mqttClient = mqtt.connect('mqtt://' + config.mqtt.hostname);
+            const watcher = new Watcher(mqttClient, board, config.watcher);
 
-            console.log("Door setup!");
-            return callback(null, door);
+            console.log("Setup: Watcher");
+            return callback(null, board);
         },
 
-        (door, callback) => {
-            const mqttClient = mqtt.connect('mqtt://' + config.mqtt.hostname);
-            console.log("Setup mqtt");
+        (board, callback) => {
+            const door = new Door(board, config.door);
 
+            console.log("Setup: DoorControl");
             return callback(null, door);
         },
 
@@ -78,6 +80,6 @@ async
             app.use('/', express.static('public'));
             app.listen(config.http.port, config.http.bind);
 
-            console.log("HTTP Server is listening!");
+            console.log("Setup: HTTP-Server");
         }
     ]);

@@ -18,12 +18,30 @@ module.exports = {
     },
 
     mqtt: {
-        hostname: 'mqtt.core.bckspc.de',
+        hostname: 'mqtt.core.bckspc.de'
+    },
 
-        options: {
-            qos: 1,
-            retain: true
-        }
+    watcher: {
+        bindings: [
+            {
+                gpio: 14,
+                debounceMs: 100,
+                high: 'OPEN',
+                low: 'CLOSED',
+                topic: 'test/foo/bar',
+                retain: true,
+                qos: 1
+            },
+            {
+                gpio: 15,
+                debounceMs: 42,
+                high: 'RELEASED',
+                low: 'PRESSED',
+                topic: 'test/foo42',
+                retain: true,
+                qos: 1
+            },
+        ]
     },
 
     door: {
