@@ -18,7 +18,7 @@ module.exports = {
     },
 
     mqtt: {
-        host: 'mqtt.core.bckspc.de',
+        hostname: 'mqtt.core.bckspc.de',
 
         options: {
             qos: 1,
