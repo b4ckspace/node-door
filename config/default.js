@@ -17,6 +17,15 @@ module.exports = {
         ca: ''
     },
 
+    mqtt: {
+        host: 'mqtt.core.bckspc.de',
+
+        options: {
+            qos: 1,
+            retain: true
+        }
+    },
+
     door: {
 
         open: {

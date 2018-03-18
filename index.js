@@ -1,18 +1,17 @@
 'use strict';
 
-const config = require('./lib/config').getConfig('/home/schinken/projects/backspace/node-door/config/production.js');
+const mqtt = require('mqtt');
 const async = require('async');
-
+const express = require('express');
 const Firmata = require('firmata');
+const bodyParser = require('body-parser');
+
+const config = require('./lib/config').getConfig('/home/schinken/projects/backspace/node-door/config/production.js');
 const Ldap = require('./lib/Auth/Ldap');
 const Door = require('./lib/Control/Door');
 
-const express = require('express');
-const bodyParser = require('body-parser');
 
 const ldap = new Ldap(config.ldap);
-
-let door = null;
 
 async
     .waterfall([
@@ -28,6 +27,13 @@ async
             const door = new Door(board, config.door);
 
             console.log("Door setup!");
+            return callback(null, door);
+        },
+
+        (door, callback) => {
+            const mqttClient = mqtt.connect('mqtt://' + config.mqtt.hostname);
+            console.log("Setup mqtt");
+
             return callback(null, door);
         },
 
