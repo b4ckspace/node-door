@@ -11,6 +11,11 @@ a, a:active, a:visited, a:hover {
     width: 100%;
 }
 
+.logo-door {
+    width: 100px;
+    margin: 24px 0;
+}
+
 .container {
     text-align: center;
     margin:0 auto;
