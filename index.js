@@ -70,7 +70,7 @@ async
 
 
             app.use('/', express.static('public'));
-            app.listen(config.http.port);
+            app.listen(config.http.port, config.http.bind);
 
             console.log("HTTP Server is listening!");
         }
