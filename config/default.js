@@ -14,5 +14,23 @@ module.exports = {
         dn: '',
         password: '',
         ca: ''
+    },
+
+    door: {
+
+        open: {
+            gpio: 10,
+            holdMs: 200
+        },
+
+        close: {
+            gpio: 11,
+            holdMs: 200
+        },
+
+        buzzer: {
+            gpio: 12,
+            holdMs: (10 * 1000)
+        }
     }
 };

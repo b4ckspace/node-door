@@ -1,0 +1,10 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="106" height="51"  xml:space="preserve" id="doorButton">
+    <g id="doorButton-group">
+        <circle id="doorButton-point1" stroke="rgb(36, 98, 170)" stroke-width="1" stroke-miterlimit="10" fill="none" cx="3.5" cy="24.5" r="2.5" />
+        <circle id="doorButton-point2" stroke="rgb(36, 98, 170)" stroke-width="1" stroke-miterlimit="10" fill="rgb(36, 98, 170)" cx="28.5" cy="47.5" r="2.5" />
+        <path id="doorButton-path" stroke="rgb(36, 98, 170)" stroke-width="1" stroke-miterlimit="10" fill="none" d="M 3.51,26.98 L 3.51,34.98 17.46,47.51 26.09,47.51" />
+    </g>
+    <path id="doorButton-backgroundForm" stroke="none" fill="rgb(36, 98, 170)" d="M 13.13,-0 L 100.87,-0 C 102.66,-0 103.3,0.19 103.95,0.53 104.61,0.88 105.12,1.39 105.47,2.05 105.81,2.7 106,3.34 106,5.13 L 106,37.87 C 106,39.66 105.81,40.3 105.47,40.95 105.12,41.61 104.61,42.12 103.95,42.47 103.3,42.81 102.66,43 100.87,43 L 21.86,43 C 20.86,43 20.52,42.97 20.15,42.89 19.77,42.81 19.43,42.68 19.1,42.48 18.77,42.29 18.49,42.08 17.76,41.41 L 9.92,34.25 C 9.13,33.53 8.88,33.25 8.64,32.89 8.41,32.54 8.25,32.17 8.14,31.76 8.04,31.35 8,30.97 8,29.9 L 8,5.13 C 8,3.34 8.19,2.7 8.53,2.05 8.88,1.39 9.39,0.88 10.05,0.53 10.7,0.19 11.34,-0 13.13,-0 Z M 13.13,-0" />
+    
+    <text  fill="rgb(255, 255, 255)" font-family="LucidaGrande-Bold, 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif" font-weight="bold" font-size="20" x="25.71" y="11" text-anchor="middle"><tspan x="57" y="30">DOOR</tspan></text>
+</svg>

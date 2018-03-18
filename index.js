@@ -1,47 +1,77 @@
-//const Firmata = require('firmata');
+'use strict';
+
 const config = require('./lib/config').getConfig('/home/schinken/projects/backspace/node-door/config/production.js');
+const async = require('async');
+
+const Firmata = require('firmata');
 const Ldap = require('./lib/Auth/Ldap');
-const ldap = new Ldap(config.ldap);
+const Door = require('./lib/Control/Door');
 
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
+const ldap = new Ldap(config.ldap);
 
-app.get('/users', (request, result) => {
+let door = null;
 
-    ldap.getUsers((error, users) => {
-        result.json({
-            users: users.sort((a, b) => {
-                return a.toLowerCase().localeCompare(b.toLowerCase());
+async
+    .waterfall([
+        (callback) => {
+            const board = new Firmata(config.firmata.port);
+            board.on('ready', () => {
+                console.log("Board connected!");
+                return callback(null, board);
             })
-        })
-    });
-});
+        },
 
-/*
-const board = new Firmata(config.firmata.port);
+        (board, callback) => {
+            const door = new Door(board, config.door);
 
-board.on('ready', () => {
-    console.log('Foobar');
-});
-    */
+            console.log("Door setup!");
+            return callback(null, door);
+        },
 
-app.post('/operate', (request, result) => {
-    const username = request.body.uid;
-    const password = request.body.password;
+        (door, callback) => {
+            const app = express();
+            app.use(bodyParser.urlencoded({ extended: false }));
 
-    ldap.login(username, password, (error, success) => {
+            app.get('/users', (request, result) => {
 
-        if (success) {
-            return result.redirect('/success.html');
+                ldap.getUsers((error, users) => {
+                    result.json({
+                        users: users.sort((a, b) => {
+                            return a.toLowerCase().localeCompare(b.toLowerCase());
+                        })
+                    })
+                });
+            });
+
+            app.post('/operate', (request, result) => {
+                const type = request.body.type;
+                const username = request.body.uid;
+                const password = request.body.password;
+
+                ldap.login(username, password, (error, success) => {
+
+                    if (success) {
+                        door.buzzer();
+
+                        switch(type) {
+                            case 'Open': door.open(); break;
+                            case 'Close': door.close(); break;
+                        }
+
+                        return result.redirect('/success.html');
+                    }
+
+                    return result.redirect('/unauthorized.html');
+                });
+            });
+
+
+            app.use('/', express.static('public'));
+            app.listen(config.http.port);
+
+            console.log("HTTP Server is listening!");
         }
-
-        return result.redirect('/unauthorized.html');
-    });
-});
-
-
-app.use('/', express.static('public'));
-app.listen(config.http.port);
+    ]);
