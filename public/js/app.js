@@ -1,18 +1,3 @@
-function getCookie(key) {
-    var parts = ('; ' + document.cookie).split('; ' + key + '=');
-
-    if (parts.length === 2) {
-        return parts.pop().split(";").shift();
-    }
-}
-
-function setCookie(key, value, days) {
-    var expiration = new Date();
-    expiration.setTime(expiration.getTime() + (days * 24 * 60 * 60 * 1000));
-
-    document.cookie = key + '=' + value + '; expires=' + expiration.toGMTString() + '; path=/';
-}
-
 function loadUsers(callback) {
     var usersRequest = new XMLHttpRequest();
 
@@ -29,7 +14,7 @@ function loadUsers(callback) {
 var userSelect = document.getElementById('users');
 
 userSelect.onchange = function() {
-    setCookie('uid', userSelect.value, 1337);
+    localStorage.setItem('uid', userSelect.value);
 };
 
 loadUsers(function (error, users) {
@@ -41,7 +26,7 @@ loadUsers(function (error, users) {
         userSelect.appendChild(option);
     });
 
-    var uid = getCookie('uid');
+    var uid = localStorage.getItem('uid');
     if (uid) {
        userSelect.value = uid;
     }
