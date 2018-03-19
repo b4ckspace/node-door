@@ -6,7 +6,11 @@ const express = require('express');
 const Firmata = require('firmata');
 const bodyParser = require('body-parser');
 
-const config = require('./lib/config').getConfig('/home/schinken/projects/backspace/node-door/config/production.js');
+const argv = require('yargs')
+    .usage('Usage: $0 --config config')
+    .argv;
+
+const config = require('./lib/config').getConfig(argv.config);
 const Ldap = require('./lib/Auth/Ldap');
 const Door = require('./lib/Control/Door');
 const Watcher = require('./lib/Control/Watcher');
