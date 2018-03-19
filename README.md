@@ -16,6 +16,8 @@ node index.js --config <path to config>
 The default configuration resides in config/default.js. You should make your own copy of that and provide the path through the `--config` parameter.
 This application needs an LDAP and MQTT-Server to function. 
 
+It's recommended to run this application behind an reverse proxy which terminates SSL. You should never ever run this application without SSL!
+
 ## hardware
 
 In our setup the hardware is just a raspberry pi with an arduino nano connected. The arduino needs the library/example StandardFirmata flashed.
