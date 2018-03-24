@@ -139,7 +139,8 @@ async
             logger.info({
                 evt: 'setup',
                 module: 'http',
-                host: config.mqtt.hostname
+                listen: config.http.bind,
+                port: config.http.port
             });
         }
     ]);
