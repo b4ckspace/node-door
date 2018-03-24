@@ -12,6 +12,7 @@
     "ldap-escape": "^1.1.5",
     "ldapjs": "^1.0.2",
     "mqtt": "^2.16.0",
+    "winston": "^2.4.1",
     "yargs": "^11.0.0"
   },
   "devDependencies": {},

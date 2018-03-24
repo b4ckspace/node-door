@@ -18,7 +18,7 @@ module.exports = {
     },
 
     mqtt: {
-        hostname: 'mqtt.core.bckspc.de'
+        hostname: 'mqtt://mqtt.core.bckspc.de'
     },
 
     watcher: {

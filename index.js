@@ -11,6 +11,7 @@ const argv = require('yargs')
     .argv;
 
 const config = require('./lib/config').getConfig(argv.config);
+const logger = require('./lib/logger');
 const Ldap = require('./lib/Auth/Ldap');
 const Door = require('./lib/Control/Door');
 const Watcher = require('./lib/Control/Watcher');
@@ -23,23 +24,48 @@ async
         (callback) => {
             const board = new Firmata(config.firmata.port);
             board.on('ready', () => {
-                console.log("Setup: Board connection");
+                logger.info({
+                    evt: 'setup',
+                    module: 'firmata',
+                    port: config.firmata.port
+                });
+
                 return callback(null, board);
-            })
+            });
+
+            board.on('error' , (error) => {
+                logger.error({
+                    evt: 'setup',
+                    module: 'firmata',
+                    port: config.firmata.port,
+                    message: '' + error
+                });
+
+                return callback(error);
+            });
         },
 
         (board, callback) => {
-            const mqttClient = mqtt.connect('mqtt://' + config.mqtt.hostname);
+            const mqttClient = mqtt.connect(config.mqtt.hostname);
             const watcher = new Watcher(mqttClient, board, config.watcher);
 
-            console.log("Setup: Watcher");
+            logger.info({
+                evt: 'setup',
+                module: 'watcher',
+                host: config.mqtt.hostname
+            });
+
             return callback(null, board);
         },
 
         (board, callback) => {
             const door = new Door(board, config.door);
 
-            console.log("Setup: DoorControl");
+            logger.info({
+                evt: 'setup',
+                module: 'door'
+            });
+
             return callback(null, door);
         },
 
@@ -63,6 +89,14 @@ async
                 const username = request.body.uid;
                 const password = request.body.password;
 
+                logger.info({
+                    route: '/operate',
+                    method: 'post',
+                    module: 'http',
+                    type: type,
+                    username: username
+                });
+
                 ldap.login(username, password, (error, success) => {
 
                     if (success) {
@@ -73,8 +107,26 @@ async
                             case 'Close': door.close(); break;
                         }
 
+                        logger.error({
+                            route: '/operate',
+                            method: 'post',
+                            module: 'http',
+                            result: 'success',
+                            type: type,
+                            username: username
+                        });
+
                         return result.redirect('/success.html');
                     }
+
+                    logger.error({
+                        route: '/operate',
+                        method: 'post',
+                        module: 'http',
+                        result: 'unauthorized',
+                        type: type,
+                        username: username
+                    });
 
                     return result.redirect('/unauthorized.html');
                 });
@@ -84,6 +136,10 @@ async
             app.use('/', express.static('public'));
             app.listen(config.http.port, config.http.bind);
 
-            console.log("Setup: HTTP-Server");
+            logger.info({
+                evt: 'setup',
+                module: 'http',
+                host: config.mqtt.hostname
+            });
         }
     ]);
