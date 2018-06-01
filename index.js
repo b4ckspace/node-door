@@ -15,7 +15,7 @@ const logger = require('./lib/logger');
 const Ldap = require('./lib/Auth/Ldap');
 const Door = require('./lib/Control/Door');
 const Watcher = require('./lib/Control/Watcher');
-
+const Output = require('./lib/Control/Output.js');
 
 const ldap = new Ldap(config.ldap);
 
@@ -28,6 +28,13 @@ async
                     evt: 'setup',
                     module: 'firmata',
                     port: config.firmata.port
+                });
+
+                // Initialize other gpios
+                (config.gpio || []).forEach((entry) => {
+                    console.log(entry);
+                    const output = new Output(board, entry.gpio, entry.activeHigh);
+                    output.off();
                 });
 
                 return callback(null, board);

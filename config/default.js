@@ -61,5 +61,10 @@ module.exports = {
             activeHigh: false,
             holdMs: (10 * 1000)
         }
-    }
+    },
+
+    gpio: [
+        { gpio: 3, activeHigh: false }
+    ]
+
 };
