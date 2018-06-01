@@ -32,7 +32,6 @@ async
 
                 // Initialize other gpios
                 (config.gpio || []).forEach((entry) => {
-                    console.log(entry);
                     const output = new Output(board, entry.gpio, entry.activeHigh);
                     output.off();
                 });
