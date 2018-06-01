@@ -107,12 +107,12 @@ async
                             case 'Close': door.close(); break;
                         }
 
-                        logger.error({
+                        logger.info({
                             route: '/operate',
                             method: 'post',
                             module: 'http',
-                            result: 'success',
                             type: type,
+                            result: 'success',
                             username: username
                         });
 
