@@ -24,7 +24,7 @@ module.exports = {
     watcher: {
         bindings: [
             {
-                gpio: 14,
+                gpio: 8,
                 debounceMs: 100,
                 high: 'OPEN',
                 low: 'CLOSED',
@@ -33,7 +33,7 @@ module.exports = {
                 qos: 1
             },
             {
-                gpio: 15,
+                gpio: 9,
                 debounceMs: 42,
                 high: 'RELEASED',
                 low: 'PRESSED',
@@ -47,17 +47,18 @@ module.exports = {
     door: {
 
         open: {
-            gpio: 10,
+            gpio: 4,
             holdMs: 200
         },
 
         close: {
-            gpio: 11,
+            gpio: 5,
             holdMs: 200
         },
 
         buzzer: {
-            gpio: 12,
+            gpio: 2,
+            activeHigh: false,
             holdMs: (10 * 1000)
         }
     }
