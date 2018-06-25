@@ -48,11 +48,13 @@ module.exports = {
 
         open: {
             gpio: 4,
+            activeHigh: false,
             holdMs: 200
         },
 
         close: {
             gpio: 5,
+            activeHigh: false,
             holdMs: 200
         },
 
