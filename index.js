@@ -106,11 +106,16 @@ async
                 ldap.login(username, password, (error, success) => {
 
                     if (success) {
-                        door.buzzer();
 
                         switch(type) {
-                            case 'Open': door.open(); break;
-                            case 'Close': door.close(); break;
+                            case 'Open':
+                                door.buzzer();
+                                door.open();
+                                break;
+
+                            case 'Close':
+                                door.close();
+                                break;
                         }
 
                         logger.info({
