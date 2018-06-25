@@ -26,18 +26,27 @@ module.exports = {
             {
                 gpio: 8,
                 debounceMs: 100,
-                high: 'OPEN',
-                low: 'CLOSED',
-                topic: 'test/foo/bar',
+                high: 'open',
+                low: 'closed',
+                topic: 'sensor/door/lock',
                 retain: true,
                 qos: 1
             },
             {
                 gpio: 9,
                 debounceMs: 42,
-                high: 'RELEASED',
-                low: 'PRESSED',
-                topic: 'test/foo42',
+                high: 'released',
+                low: 'pressed',
+                topic: 'sensor/door/button',
+                retain: true,
+                qos: 1
+            },
+            {
+                gpio: 10,
+                debounceMs: 42,
+                high: 'open',
+                low: 'closed',
+                topic: 'sensor/door/frame',
                 retain: true,
                 qos: 1
             },
