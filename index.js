@@ -107,17 +107,6 @@ async
 
                     if (success) {
 
-                        switch(type) {
-                            case 'Open':
-                                door.buzzer();
-                                door.open();
-                                break;
-
-                            case 'Close':
-                                door.close();
-                                break;
-                        }
-
                         logger.info({
                             route: '/operate',
                             method: 'post',
@@ -127,7 +116,18 @@ async
                             username: username
                         });
 
-                        return result.redirect('/success.html');
+                        switch(type) {
+                            case 'Open':
+                                door.buzzer();
+                                door.open();
+
+                                return result.redirect('/opened.html');
+
+                            case 'Close':
+                                door.close();
+
+                                return result.redirect('/closed.html');
+                        }
                     }
 
                     logger.error({
