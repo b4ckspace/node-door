@@ -50,6 +50,15 @@ module.exports = {
                 retain: true,
                 qos: 1
             },
+            {
+                gpio: 12,
+                debounceMs: 2000,
+                high: 'released',
+                low: 'pressed',
+                topic: 'sensor/door/bell',
+                retain: true,
+                qos: 1
+            },
         ]
     },
 
