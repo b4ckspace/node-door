@@ -51,7 +51,7 @@ module.exports = {
                 qos: 1
             },
             {
-                gpio: 12,
+                gpio: 11,
                 debounceMs: 2800,
                 high: 'released',
                 low: 'pressed',
