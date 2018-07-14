@@ -52,7 +52,7 @@ module.exports = {
             },
             {
                 gpio: 12,
-                debounceMs: 2000,
+                debounceMs: 2800,
                 high: 'released',
                 low: 'pressed',
                 topic: 'sensor/door/bell',
