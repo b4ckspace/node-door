@@ -25,7 +25,7 @@ module.exports = {
         bindings: [
             {
                 gpio: 8,
-                debounceMs: 100,
+                debounceMs: 120,
                 high: 'open',
                 low: 'closed',
                 topic: 'sensor/door/lock',
@@ -34,7 +34,7 @@ module.exports = {
             },
             {
                 gpio: 9,
-                debounceMs: 42,
+                debounceMs: 120,
                 high: 'released',
                 low: 'pressed',
                 topic: 'sensor/door/button',
@@ -43,7 +43,7 @@ module.exports = {
             },
             {
                 gpio: 10,
-                debounceMs: 42,
+                debounceMs: 120,
                 high: 'open',
                 low: 'closed',
                 topic: 'sensor/door/frame',
@@ -52,7 +52,7 @@ module.exports = {
             },
             {
                 gpio: 11,
-                debounceMs: 2800,
+                debounceMs: 500,
                 high: 'released',
                 low: 'pressed',
                 topic: 'sensor/door/bell',
