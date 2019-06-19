@@ -82,6 +82,11 @@ async
             app.get('/users', (request, result) => {
 
                 ldap.getUsers((error, users) => {
+                    if (error) {
+                        logger.error({ route: '/users', error: error });
+                        return result.status(500).send('LDAP connection failed');
+                    }
+
                     result.json({
                         users: users.sort((a, b) => {
                             return a.toLowerCase().localeCompare(b.toLowerCase());
@@ -105,8 +110,12 @@ async
 
                 ldap.login(username, password, (error, success) => {
 
-                    if (success) {
+                    if (error) {
+                        logger.error({ route: '/operate', error: error });
+                        return result.status(500).send('LDAP connection failed');
+                    }
 
+                    if (success) {
                         logger.info({
                             route: '/operate',
                             method: 'post',
