@@ -77,14 +77,10 @@ module.exports = {
         },
 
         buzzer: {
-            gpio: 2,
+            gpio: 3,
             activeHigh: false,
             holdMs: (10 * 1000)
         }
-    },
-
-    gpio: [
-        { gpio: 3, activeHigh: false }
-    ]
+    }
 
 };
