@@ -92,6 +92,7 @@ select, input, .button {
 
 .type[value=Close] {
     float: left;
+    color: #000;
 }
 
 
