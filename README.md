@@ -1,6 +1,13 @@
 # node-door
 
-This is the new door system used in backspace since 2018 and replaces the old, but stable [bckspc-dooropen][1] and [py-webrelais][2].
+---
+**⚠️ This project is deprecated! ⚠️**
+
+Superseeded by: https://github.com/b4ckspace/pydoor
+
+---
+
+This is the ~~new~~ old door system used in the backspace between 2018 until 2023 and replaced the even older [bckspc-dooropen][1] and [py-webrelais][2].
 
 ## install
 
